@@ -49,9 +49,15 @@ namespace DoToo.Repositories
 		}
 		public async Task AddItem(ToDoItem item)
 		{
+			await CreateConnection();
+			await connection.InsertAsync(item);
+			OnItemAdded?.Invoke(this, item);
 		}
 		public async Task UpdateItem(ToDoItem item)
 		{
+			await CreateConnection();
+			await connection.UpdateAsync(item);
+			OnItemUpdated?.Invoke(this, item);
 		}
 
 		public async Task AddOrUpdate(ToDoItem item)
