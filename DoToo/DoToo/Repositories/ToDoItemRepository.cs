@@ -11,6 +11,8 @@ namespace DoToo.Repositories
 	public class ToDoItemRepository : IToDoItemRepository
 	{
 		private SQLiteAsyncConnection connection;
+
+		//Since the method is asynchronous, it cannot be called from the constructor without introducing a locking strategy. pg.55
 		private async Task CreateConnection()
 		{
 			//check if we already have a connection
